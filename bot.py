@@ -11,23 +11,25 @@ def send_message(text):
     requests.post(url, data={"chat_id": CHANNEL, "text": text})
 
 def get_gold18_price():
-    r = requests.get(API_URL, timeout=10).json()
-    # گرفتن قیمت خرید طلا 18 عیار
     try:
-        gold18_buy = int(r['Gold']['G18']['Price'])
-    except:
-        gold18_buy = 0
+        r = requests.get(API_URL, timeout=10).json()
+        print("JSON دریافت شد:", r)  # لاگ JSON
 
-    gold18_sell = gold18_buy - 90000  # فروش = خرید - 90 هزار تومان
-    return gold18_buy, gold18_sell
+        # گرفتن قیمت خرید طلا 18 عیار
+        gold18_buy = int(r['Gold']['G18']['Price'])
+        gold18_sell = gold18_buy - 90000  # فروش = خرید - 90 هزار تومان
+        return gold18_buy, gold18_sell
+    except Exception as e:
+        print("خطا در دریافت قیمت:", e)
+        return None, None
 
 while True:
-    try:
-        buy, sell = get_gold18_price()
+    buy, sell = get_gold18_price()
+    if buy and sell:
         msg = f"خرید : {buy:,} ریال\nفروش : {sell:,} ریال\n\nهاید طلا"
         send_message(msg)
         print("ارسال شد ✅")
-    except Exception as e:
-        print("خطا:", e)
+    else:
+        print("قیمت دریافت نشد ❌")
 
     time.sleep(60)  # هر دقیقه
