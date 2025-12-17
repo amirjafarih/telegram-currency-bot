@@ -1,7 +1,7 @@
 import requests
 import time
 
-BOT_TOKEN = "2002214368:AAE41G7Wr5EAaJBZu3YZRjmRKlCjI37-MNg"
+BOT_TOKEN = "2002214368:AAG20ASn5uukBFAYFWNxH0uvOOBOyxplMGc"
 CHANNEL = "@price_offhuhfcc"
 
 API_URL = "https://BrsApi.ir/Api/Market/Gold_Currency.php?key=BPYUM5gxjVNMHPLPVxDiVKkUfBZM9BeF"
